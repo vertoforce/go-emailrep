@@ -15,6 +15,7 @@ const (
 //
 // You can make this request without an api key, but you will have a higher limit on the api requests.
 // If the API key is blank, it will not send it.
+//
 // `returnSummary` is if you want the request to return a human readable summary.
 func (c *Client) Query(ctx context.Context, email string, returnSummary bool) (*SearchResponse, error) {
 	// Build URL
