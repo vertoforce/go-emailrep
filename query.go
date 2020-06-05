@@ -11,12 +11,6 @@ const (
 	baseURL = "https://emailrep.io"
 )
 
-// Query is the same as Client.Query with an empty API key
-func Query(ctx context.Context, email string, returnSummary bool) (*SearchResponse, error) {
-	c := &Client{}
-	return c.Query(ctx, email, returnSummary)
-}
-
 // Query Makes a request to emailrep.io to get information on the email reputation
 // You can make this request without an api key, but you will have a higher limit on the api requests.
 // If the API key is blank, it will not send it.
