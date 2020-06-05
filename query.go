@@ -12,12 +12,19 @@ const (
 )
 
 // Query Makes a request to emailrep.io to get information on the email reputation
-func Query(ctx context.Context, email string) (*SearchResponse, error) {
-	req, err := http.NewRequestWithContext(ctx, "GET", fmt.Sprintf("%s/%s", baseURL, email), nil)
+// returnSummary is if you want the request to return a human readable summary
+func Query(ctx context.Context, email string, returnSummary bool) (*SearchResponse, error) {
+	// Build URL
+	URL := fmt.Sprintf("%s/%s", baseURL, email)
+	if returnSummary {
+		URL += "?summary=true"
+	}
+
+	// Prepare and make request
+	req, err := http.NewRequestWithContext(ctx, "GET", URL, nil)
 	if err != nil {
 		return nil, err
 	}
-
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
 		return nil, err

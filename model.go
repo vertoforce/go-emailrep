@@ -34,4 +34,5 @@ type Details struct {
 	SPFStrict               bool          `json:"spf_strict"`                 // sufficiently strict SPF record to prevent spoofing
 	DmarcEnforced           bool          `json:"dmarc_enforced"`             // DMARC is configured correctly and enforced
 	Profiles                []interface{} `json:"profiles"`                   // online profiles used by the email
+	Summary                 string        // Human readable summary only returned if `summary=true`
 }
