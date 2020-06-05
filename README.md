@@ -6,10 +6,11 @@
 This is a simple library to interface with emailrepo.io.
 
 * [x] Query an email
+* [x] API Key support
 * [ ] Submit an email
 
 ## Usage
 
 ```go
-result, err := Query(context.Background(), "test@test.com")
+result, err := Query(context.Background(), "test@test.com", true)
 ```
