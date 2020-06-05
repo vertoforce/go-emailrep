@@ -23,6 +23,15 @@ func Query(ctx context.Context, email string) (*SearchResponse, error) {
 		return nil, err
 	}
 
+	switch resp.StatusCode {
+	case 400:
+		return nil, fmt.Errorf("invalid email")
+	case 401:
+		return nil, fmt.Errorf("invalid api key")
+	case 429:
+		return nil, fmt.Errorf("too many requests. contact emailrep.io for an api key")
+	}
+
 	ret := &SearchResponse{}
 	err = json.NewDecoder(resp.Body).Decode(ret)
 	if err != nil {
