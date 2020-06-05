@@ -6,7 +6,8 @@ import (
 )
 
 func TestQuery(t *testing.T) {
-	res, err := Query(context.Background(), "test@test.com", true)
+	c := &Client{}
+	res, err := c.Query(context.Background(), "test@test.com", true)
 	if err != nil {
 		t.Error(err)
 		return
