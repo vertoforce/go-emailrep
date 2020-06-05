@@ -11,9 +11,16 @@ const (
 	baseURL = "https://emailrep.io"
 )
 
+// Query is the same as Client.Query with an empty API key
+func Query(ctx context.Context, email string, returnSummary bool) (*SearchResponse, error) {
+	c := &Client{}
+	return c.Query(ctx, email, returnSummary)
+}
+
 // Query Makes a request to emailrep.io to get information on the email reputation
 // returnSummary is if you want the request to return a human readable summary
-func Query(ctx context.Context, email string, returnSummary bool) (*SearchResponse, error) {
+// If the API key is blank, it will not send it
+func (c *Client) Query(ctx context.Context, email string, returnSummary bool) (*SearchResponse, error) {
 	// Build URL
 	URL := fmt.Sprintf("%s/%s", baseURL, email)
 	if returnSummary {
@@ -24,6 +31,12 @@ func Query(ctx context.Context, email string, returnSummary bool) (*SearchRespon
 	req, err := http.NewRequestWithContext(ctx, "GET", URL, nil)
 	if err != nil {
 		return nil, err
+	}
+	if c.UserAgent != "" {
+		req.Header.Add("User-Agent", c.UserAgent)
+	}
+	if c.APIKey != "" {
+		req.Header.Add("Key", c.APIKey)
 	}
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
