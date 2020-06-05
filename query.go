@@ -11,7 +11,8 @@ const (
 	baseURL = "https://emailrep.io"
 )
 
-// Query Makes a request to emailrep.io to get information on the email reputation
+// Query Makes a request to emailrep.io to get information on the email reputation.
+//
 // You can make this request without an api key, but you will have a higher limit on the api requests.
 // If the API key is blank, it will not send it.
 // `returnSummary` is if you want the request to return a human readable summary.
