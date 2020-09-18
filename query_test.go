@@ -17,7 +17,7 @@ func TestQuery(t *testing.T) {
 	}
 
 	// check for summary
-	if res.Details.Summary == "" {
+	if res.Summary == "" {
 		t.Errorf("did not get summary response")
 	}
 }

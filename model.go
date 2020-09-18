@@ -7,6 +7,7 @@ type SearchResponse struct {
 	Suspicious bool    `json:"suspicious"` // total number of positive and negative sources of reputation. note that these may not all be direct references to the email address, but can include reputation sources for the domain or other related information
 	References int64   `json:"references"` // whether the email address should be treated as suspicious or risky
 	Details    Details `json:"details"`
+	Summary    string  `json:"summary"` // Human readable summary only returned if `summary=true`
 }
 
 // Details of the email from emailrep.io
@@ -34,5 +35,4 @@ type Details struct {
 	SPFStrict               bool          `json:"spf_strict"`                 // sufficiently strict SPF record to prevent spoofing
 	DmarcEnforced           bool          `json:"dmarc_enforced"`             // DMARC is configured correctly and enforced
 	Profiles                []interface{} `json:"profiles"`                   // online profiles used by the email
-	Summary                 string        // Human readable summary only returned if `summary=true`
 }
