@@ -29,13 +29,7 @@ func (c *Client) Query(ctx context.Context, email string, returnSummary bool) (*
 	if err != nil {
 		return nil, err
 	}
-	if c.UserAgent != "" {
-		req.Header.Add("User-Agent", c.UserAgent)
-	}
-	if c.APIKey != "" {
-		req.Header.Add("Key", c.APIKey)
-	}
-	resp, err := http.DefaultClient.Do(req)
+	resp, err := c.request(req)
 	if err != nil {
 		return nil, err
 	}
