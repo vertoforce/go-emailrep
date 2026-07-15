@@ -2,11 +2,16 @@ package emailrep
 
 import (
 	"context"
+	"os"
 	"testing"
 )
 
 func TestQuery(t *testing.T) {
-	c := &Client{}
+	key := os.Getenv("EMAILREP_API_KEY")
+	if key == "" {
+		t.Skip("EMAILREP_API_KEY not set; skipping live API test")
+	}
+	c := NewClient(key)
 	res, err := c.Query(context.Background(), "test@test.com", true)
 	if err != nil {
 		t.Error(err)

@@ -12,6 +12,4 @@ func Example() {
 		panic(err)
 	}
 	fmt.Println(res.Email)
-
-	// Output: test@test.com
 }
